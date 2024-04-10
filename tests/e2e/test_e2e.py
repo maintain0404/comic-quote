@@ -1,36 +1,24 @@
 from __future__ import annotations
 
 import pytest
-from async_asgi_testclient import TestClient
+from litestar.testing import AsyncTestClient
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture()
 async def client():
     from comic_quote.app import app
-    return TestClient(app)
+
+    return AsyncTestClient(app)
 
 
-async def test_random_quote_api_success(client: TestClient):
+async def test_random_quote_api_success(client: AsyncTestClient):
     async with client:
-        resp = await client.get('')
+        resp = await client.get("api/0.1.0/quotes/random")
         assert resp.status_code == 200
-        
+
         data = resp.json()
 
-        assert 'content' in data
-        assert 'author' in data
-        assert 'comic_name' in data
-        assert 'place' in data
-
-
-async def test_random_quote_page_success(client: TestClient):
-    async with client:
-        resp = await client.get('')
-        assert resp.status_code == 200
-        
-        data = resp.json()
-
-        assert 'content' in data
-        assert 'author' in data
-        assert 'comic_name' in data
-        assert 'place' in data
+        assert "content" in data
+        assert "author" in data
+        assert "artwork_name" in data
+        assert "where" in data

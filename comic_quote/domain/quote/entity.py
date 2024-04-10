@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from typing import Annotated
-
-from sqlalchemy.orm import DeclarativeBase, mapped_column
+from dataclasses import dataclass
 
 
-class ComicQuote(DeclarativeBase):
-    id: Annotated[int, mapped_column(primary_key=True)]
+@dataclass
+class Quote:
+    id: int
     content: str
-    comic_name: str
-    place: str
+    artwork_name: str
+    who: str
     author: str
-    image: str | None
+    where: str | None = None
+    image: str | None = None
