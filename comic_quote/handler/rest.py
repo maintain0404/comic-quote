@@ -19,7 +19,7 @@ class DTO(PydanticDTO):
 class QuoteSchema(BaseModel):
     content: str
     artwork_name: str
-    who: str
+    character: str
     where: str | None
     author: str
     image: str | None
@@ -35,7 +35,7 @@ class ComicQuoteAPIController(Controller):
         schema = QuoteSchema(
             content=model.content,
             artwork_name=model.artwork_name,
-            who=model.who,
+            character=model.character,
             where=model.where,
             author=model.author,
             image=model.image,

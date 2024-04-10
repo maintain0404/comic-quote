@@ -1,0 +1,29 @@
+<head>
+  <meta charset="utf-8" />
+  <title>만화 명대사 API</title>
+
+  <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js" defer></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/debug.js" defer></script>
+  <link href="static/bundle.css" rel="stylesheet" />
+</head>
+
+<body hx-ext="multi-swap, response-targets, debug">
+  <div class="container mx-auto max-w-md p-6">
+    {% block card %}
+    <div id="quote-card"
+      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: pre-wrap;">{{ quote.content }}</p>
+      <br>
+      <div class="flex flex-row-reverse">
+        <div>
+          -&nbsp;
+          <span id="quote-character">{{ quote.character|e }}</span>
+          ,&nbsp;
+          <span id="quote-artwork">{{ quote.artwork_name }}</span>
+        </div>
+      </div>
+    </div>
+    {% endblock %}
+  </div>
+</body>

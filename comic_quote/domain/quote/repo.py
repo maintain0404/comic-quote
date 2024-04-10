@@ -7,7 +7,7 @@ QUOTES = [
         id=1,
         content="우리는 모습이 없는 까닭에 그것을 두려워한다.",
         artwork_name="블리치",
-        who="권두시",
+        character="권두시",
         where="1권",
         author="쿠로사키 이치고",
         image=None,
@@ -23,7 +23,7 @@ QUOTES = [
             "···사람들에게서 잊혀졌을 때다···!!!"
         ),
         artwork_name="원피스",
-        who="Dr. 히루루크",
+        character="Dr. 히루루크",
         where="16권",
         author="오다 에이치로",
     ),
@@ -34,7 +34,7 @@ QUOTES = [
             "무언가를 얻기 위해서는 그와 동등한 대가를 치러야 한다."
         ),
         artwork_name="강철의 연금술사",
-        who="에드워드 엘릭",
+        character="에드워드 엘릭",
         author="아라카와 히로무",
     ),
 ]

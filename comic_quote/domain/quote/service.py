@@ -10,7 +10,7 @@ from pydantic import BaseModel
 class QuoteModel(BaseModel):
     content: str
     artwork_name: str
-    who: str
+    character: str
     where: str | None
     author: str
     image: str | None
@@ -28,7 +28,7 @@ class RandomComicQuoteService:
         return QuoteModel(
             content=entity.content,
             artwork_name=entity.artwork_name,
-            who=entity.who,
+            character=entity.character,
             where=entity.where,
             author=entity.author,
             image=entity.image,

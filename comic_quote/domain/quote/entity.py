@@ -8,7 +8,7 @@ class Quote:
     id: int
     content: str
     artwork_name: str
-    who: str
+    character: str
     author: str
     where: str | None = None
     image: str | None = None
