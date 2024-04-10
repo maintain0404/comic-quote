@@ -9,6 +9,4 @@ class Quote:
     content: str
     artwork_name: str
     character: str
-    author: str
     where: str | None = None
-    image: str | None = None

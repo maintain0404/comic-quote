@@ -3,27 +3,54 @@
   <title>만화 명대사 API</title>
 
   <script src="https://unpkg.com/htmx.org@1.9.11"></script>
-  <script src="https://unpkg.com/htmx.org/dist/ext/response-targets.js" defer></script>
-  <script src="https://unpkg.com/htmx.org/dist/ext/debug.js" defer></script>
+  <script defer src="//unpkg.com/alpinejs"></script>
   <link href="static/bundle.css" rel="stylesheet" />
 </head>
 
 <body hx-ext="multi-swap, response-targets, debug">
-  <div class="container mx-auto max-w-md p-6">
-    {% block card %}
-    <div id="quote-card"
-      class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: pre-wrap;">{{ quote.content }}</p>
-      <br>
-      <div class="flex flex-row-reverse">
-        <div>
-          -&nbsp;
-          <span id="quote-character">{{ quote.character|e }}</span>
-          ,&nbsp;
-          <span id="quote-artwork">{{ quote.artwork_name }}</span>
+  <section class="w-full px-6 pb-12 antialiased bg-white">
+    <div class="mx-auto max-w-7xl">
+      <!-- Main Hero Content -->
+      <div
+        class="container max-w-sm py-32 mx-auto mt-px text-left sm:max-w-md md:max-w-lg sm:px-4 md:max-w-none md:text-center">
+        <h1
+          class="text-2xl font-bold leading-10 tracking-tight text-left text-gray-900 md:text-center sm:text-4xl md:text-7xl lg:text-8xl">
+          만화 명대사 API</h1>
+        <div class="mx-auto mt-5 text-gray-400 md:mt-8 md:max-w-lg md:text-center md:text-xl">
+          <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: pre-wrap;">{{ quote.content }}</p>
+          <br>
+          <div class="flex flex-row-reverse">
+            <div>
+              -&nbsp;
+              <span id="quote-character">{{ quote.character|e }}</span>
+              ,&nbsp;
+              <span id="quote-artwork">{{ quote.artwork_name }}</span>
+            </div>
+          </div>
         </div>
       </div>
+      <div id="quote-card"
+        class="container max-w-sm md:mx-auto block p-6 max-w-2xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+        <h2 class="text-lg font-bold leading-10 tracking-tight text-left text-gray-900 md:text-center">
+          API 사용하기</h2>
+        <br>
+        <h3 class="text-md font-bold leading-10 tracking-tight text-left text-gray-900">GET</h3>
+        <p class="font-normal text-gray-700 dark:text-gray-400" style="white-space: pre-wrap;">무작위 만화 명대사를 반환하는 API입니다.
+        </p>
+        <div
+          class="container max-w-sm md:mx-auto block p-6 max-w-2xl bg-gray-300 border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700 ">
+          api/0.1.0/quotes/random<br><br>
+          {<br>
+          &nbsp;&nbsp;"content": "우리는 모습이 없는 까닭에 그것을 두려워한다.",<br>
+          &nbsp;&nbsp;"artwork_name": "블리치",<br>
+          &nbsp;&nbsp;"character": "권두시",<br>
+          &nbsp;&nbsp;"where": "1권",<br>
+          &nbsp;&nbsp;"author": "쿠로사키 이치고",<br>
+          &nbsp;&nbsp;"image": null&<br>
+          }<br>
+        </div>
+      </div>
+      <!-- End Main Hero Content -->
     </div>
-    {% endblock %}
-  </div>
+  </section>
 </body>

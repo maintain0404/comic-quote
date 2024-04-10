@@ -4,16 +4,15 @@ import random
 from dataclasses import dataclass
 
 from comic_quote.domain.quote.repo import QuoteRepo
-from pydantic import BaseModel
 
 
-class QuoteModel(BaseModel):
+@dataclass
+class QuoteModel:
     content: str
     artwork_name: str
     character: str
-    where: str | None
     author: str
-    image: str | None
+    where: str | None
 
 
 @dataclass
@@ -30,6 +29,4 @@ class RandomComicQuoteService:
             artwork_name=entity.artwork_name,
             character=entity.character,
             where=entity.where,
-            author=entity.author,
-            image=entity.image,
         )

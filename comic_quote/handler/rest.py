@@ -21,8 +21,6 @@ class QuoteSchema(BaseModel):
     artwork_name: str
     character: str
     where: str | None
-    author: str
-    image: str | None
 
 
 class ComicQuoteAPIController(Controller):
@@ -37,7 +35,5 @@ class ComicQuoteAPIController(Controller):
             artwork_name=model.artwork_name,
             character=model.character,
             where=model.where,
-            author=model.author,
-            image=model.image,
         )
         return schema
