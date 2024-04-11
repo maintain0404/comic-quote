@@ -6,10 +6,10 @@ from litestar.contrib.pydantic import PydanticDTO
 from litestar.di import Provide
 from litestar.dto import DTOConfig
 
-from ..domain.quote.service import RandomComicQuoteService
+from ..domain.quote.impl import QuoteImpl
 from ..vendor.model import BaseModel
 
-_SERVICE = RandomComicQuoteService(repo=QuoteRepo())
+_SERVICE = QuoteImpl(repo=QuoteRepo())
 
 
 class DTO(PydanticDTO):
@@ -20,7 +20,7 @@ class QuoteSchema(BaseModel):
     content: str
     artwork_name: str
     character: str
-    where: str | None
+    location: str | None
 
 
 class ComicQuoteAPIController(Controller):
@@ -28,12 +28,12 @@ class ComicQuoteAPIController(Controller):
     dependencies = {"service": Provide(lambda: _SERVICE, sync_to_thread=False)}
 
     @get("/random")
-    async def get_a_random_quote(self, service: RandomComicQuoteService) -> QuoteSchema:
+    async def get_a_random_quote(self, service: QuoteImpl) -> QuoteSchema:
         model = await service.get_random_quote()
         schema = QuoteSchema(
             content=model.content,
             artwork_name=model.artwork_name,
             character=model.character,
-            where=model.where,
+            location=model.location,
         )
         return schema

@@ -8,7 +8,7 @@ QUOTES = [
         content="우리는 모습이 없는 까닭에 그것을 두려워한다.",
         artwork_name="블리치",
         character="권두시",
-        where="1권",
+        location="1권",
     ),
     Quote(
         id=2,
@@ -22,7 +22,7 @@ QUOTES = [
         ),
         artwork_name="원피스",
         character="Dr. 히루루크",
-        where="16권",
+        location="16권",
     ),
     Quote(
         id=3,

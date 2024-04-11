@@ -5,14 +5,14 @@ from litestar import get
 from litestar.di import Provide
 from litestar.response import Template
 
-from ..domain.quote.service import RandomComicQuoteService
+from ..domain.quote.impl import QuoteImpl
 
-_SERVICE = RandomComicQuoteService(repo=QuoteRepo())
+_SERVICE = QuoteImpl(repo=QuoteRepo())
 
 
 @get(
     path="/", dependencies={"service": Provide(lambda: _SERVICE, sync_to_thread=False)}
 )
-async def index(service: RandomComicQuoteService) -> Template:
+async def index(service: QuoteImpl) -> Template:
     model = await service.get_random_quote()
     return Template(template_name="index.html.j2", context={"quote": model})

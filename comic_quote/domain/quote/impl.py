@@ -11,12 +11,11 @@ class QuoteModel:
     content: str
     artwork_name: str
     character: str
-    author: str
-    where: str | None
+    location: str | None
 
 
 @dataclass
-class RandomComicQuoteService:
+class QuoteImpl:
     repo: QuoteRepo
 
     async def get_random_quote(self) -> QuoteModel:
@@ -28,5 +27,5 @@ class RandomComicQuoteService:
             content=entity.content,
             artwork_name=entity.artwork_name,
             character=entity.character,
-            where=entity.where,
+            location=entity.location,
         )

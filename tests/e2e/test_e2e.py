@@ -19,6 +19,5 @@ async def test_random_quote_api_success(client: AsyncTestClient):
         data = resp.json()
 
         assert "content" in data
-        assert "author" in data
         assert "artwork_name" in data
-        assert "where" in data
+        assert "location" in data

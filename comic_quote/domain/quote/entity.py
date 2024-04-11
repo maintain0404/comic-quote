@@ -9,4 +9,4 @@ class Quote:
     content: str
     artwork_name: str
     character: str
-    where: str | None = None
+    location: str | None = None
