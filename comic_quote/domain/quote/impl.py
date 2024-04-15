@@ -19,9 +19,9 @@ class QuoteImpl:
     repo: QuoteRepo
 
     async def get_random_quote(self) -> QuoteModel:
-        cnt = await self.repo.get_all_count()
+        cnt = await self.repo.count()
         id = random.randint(1, cnt)
-        entity = await self.repo.get_by_id(id)
+        entity = await self.repo.get_one_or_none(id)
 
         return QuoteModel(
             content=entity.content,

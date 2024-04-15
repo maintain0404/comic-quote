@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from litestar.contrib.sqlalchemy.base import BigIntBase
+from sqlalchemy.orm import Mapped
 
 
-@dataclass
-class Quote:
-    id: int
-    content: str
-    artwork_name: str
-    character: str
-    location: str | None = None
+class Quote(BigIntBase):
+    content: Mapped[str]
+    artwork_name: Mapped[str]
+    character: Mapped[str]
+    location: Mapped[str | None] = None

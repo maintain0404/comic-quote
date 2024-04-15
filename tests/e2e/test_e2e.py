@@ -14,9 +14,9 @@ async def client():
 async def test_random_quote_api_success(client: AsyncTestClient):
     async with client:
         resp = await client.get("api/0.1.0/quotes/random")
-        assert resp.status_code == 200
-
         data = resp.json()
+        assert data
+        assert resp.status_code == 200
 
         assert "content" in data
         assert "artwork_name" in data

@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from comic_quote.domain.quote.repo import QuoteRepo
 from litestar import Controller, get
 from litestar.contrib.pydantic import PydanticDTO
 from litestar.dto import DTOConfig
 
 from ..domain.quote.impl import QuoteImpl
 from ..vendor.model import BaseSchema
+from .deps import DEPENDENCIES
 
 
 class DTO(PydanticDTO):
@@ -22,10 +22,9 @@ class QuoteSchema(BaseSchema):
 
 class QuoteAPIController(Controller):
     path = "/quotes"
-    dto = DTO
-    service = QuoteImpl(QuoteRepo())
+    dependencies = DEPENDENCIES
 
-    @get("/random")
-    async def get_a_random_quote(self) -> QuoteSchema:
-        model = await self.service.get_random_quote()
+    @get("/random", dto=DTO[QuoteSchema])
+    async def get_a_random_quote(self, service: QuoteImpl) -> QuoteSchema:
+        model = await service.get_random_quote()
         return QuoteSchema.model_validate(model)

@@ -12,7 +12,8 @@ pydantic = "^2.6.4"
 sqlalchemy = "^2.0.29"
 uvicorn = "^0.29.0"
 pydantic-settings = "^2.2.1"
-litestar = { version = "^2.8.2", extras = ["sqlalchemy"] }
+litestar = { version = "^2.8.2", extras = ["sqlalchemy", "cli"] }
+typing_extensions = "^4.11.0"
 aiosqlite = "^0.20.0"
 
 [tool.poetry.group.dev]
