@@ -9,6 +9,18 @@ from ..vendor.model import BaseSchema
 from .deps import DEPENDENCIES
 
 
+class HealthSchema(BaseSchema):
+    status: str = "ok"
+
+
+_HEALTH = HealthSchema()
+
+
+@get("/health")
+async def healthcheck() -> HealthSchema:
+    return _HEALTH
+
+
 class DTO(PydanticDTO):
     config = DTOConfig()
 

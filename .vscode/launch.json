@@ -1,13 +1,22 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Current File",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal",
-            "justMyCode": false
-        },
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Current File",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "Litestar",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "litestar",
+      "args": ["--app", "comic_quote.app:app", "run"],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
 }

@@ -10,19 +10,20 @@ from litestar.contrib.sqlalchemy.plugins import (
     SQLAlchemyAsyncConfig,
     SQLAlchemyInitPlugin,
 )
-from litestar.static_files import create_static_files_router
+from litestar.logging.config import StructLoggingConfig
+from litestar.plugins.structlog import StructlogConfig, StructlogPlugin
 from litestar.template.config import TemplateConfig
 
 from .config import config
 from .handler.htmx import QuoteHTMXController
-from .handler.rest import QuoteAPIController
+from .handler.rest import QuoteAPIController, healthcheck
 from .vendor.app import Application
 
 app = Application(
     route_handlers=[
         QuoteHTMXController,
-        Router("api/0.1.0/", route_handlers=[QuoteAPIController]),
-        create_static_files_router(path="/static", directories=["assets"]),
+        Router("api/0.1.0/", route_handlers=[QuoteAPIController, healthcheck]),
+        # create_static_files_router(path="/static", directories=["assets"]),
     ],
     template_config=TemplateConfig(
         directory=Path("jinja2"),
@@ -37,6 +38,11 @@ app = Application(
                     script_location="comic_quote/core/db/migrations"
                 ),
             ),
+        ),
+        StructlogPlugin(
+            config=StructlogConfig(
+                structlog_logging_config=StructLoggingConfig(log_exceptions="always")
+            )
         ),
     ],
 )
