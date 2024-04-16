@@ -38,15 +38,17 @@ pytest-asyncio = "^0.21.0"
 async-asgi-testclient = "^1.4.11"
 
 [tool.ruff]
-select = ['E', 'F', 'I', 'UP']
 src = ['comic-quote', 'tests']
 
-[tool.ruff.isort] # rule I
+[tool.ruff.lint]
+select = ['E', 'F', 'I', 'UP']
+
+[tool.ruff.lint.isort] # rule I
 extra-standard-library = ["typing_extensions"]
 required-imports = ["from __future__ import annotations"]
 known-first-party = ['comic-quote']
 
-[tool.ruff.pydocstyle] # rule D
+[tool.ruff.lint.pydocstyle] # rule D
 convention = 'google'
 
 [tool.pytest.ini_options]
