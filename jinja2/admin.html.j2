@@ -1,0 +1,84 @@
+<head>
+  <meta charset="utf-8" />
+  <title>만화 명대사 API 관리</title>
+  <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+  <script defer src="//unpkg.com/alpinejs"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.11/dist/ext/json-enc.js"></script>
+  <link href="static/bundle.css" rel="stylesheet" />
+</head>
+{% macro Input(name, placeholder, type="text", required=True) -%}
+<div class="mb-5">
+  <label for="{{ name }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ placeholder }}{% if
+    required %}&nbsp;*{% endif %}</label>
+  <input type="{{ text }}" id="{{ name }}" name="{{ name }}"
+    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+    {% if required %}required{% endif %} />
+</div>
+{%- endmacro %}
+
+<body hx-ext="multi-swap, response-targets, debug">
+  <div class="container md:mx-auto max-w-7xl px-6">
+    <div class="relative overflow-x-auto">
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 py-3">
+              ID
+            </th>
+            <th scope="col" class="px-6 py-3">
+              대사
+            </th>
+            <th scope="col" class="px-6 py-3">
+              작품명
+            </th>
+            <th scope="col" class="px-6 py-3">
+              캐릭터
+            </th>
+            <th scope="col" class="px-6 py-3">
+              위치
+            </th>
+            <th scope="col" class="px-6 py-3">
+              액션
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for quote in quotes %}
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" id="quote-{{quote.id}}">
+            <form id="quote-form-{{quote.id}}" hx-put="/admin/quotes/{{ quote.id }}" hx-ext='json-enc' hx-swap="none"
+              hidden>
+              <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ quote.id }}
+              </th>
+              <td class="px-6 py-2">
+                <textarea name="content">{{ quote.content }}</textarea>
+              </td>
+              <td class="px-6 py-2">
+                <input type="text" name="artwork_name" value="{{ quote.artwork_name }}">
+              </td>
+              <td class="px-6 py-2">
+                <input type="text" name="character" value="{{ quote.character }}">
+              </td>
+              <td class="px-6 py-2">
+                <input type="text" name="location" value="{{ quote.location }}">
+              </td>
+              <td class="px-6 py-2">
+                <button hx-delete="/admin/quotes/{{ quote.id }}" hx-ext='json-enc' hx-swap="delete"
+                  hx-target="#quote-{{ quote.id }}">삭제</button>
+                <button type="submit">수정</button>
+              </td>
+            </form>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <h2 class="text-lg font-bold leading-10 tracking-tight text-left text-gray-900 md:text-center">데이터 추가</h2>
+    {# Warning: Check out if hx-post uri is broken #}
+    <form hx-post="/admin/quotes" hx-ext="json-enc" hx-swap="none">
+      {{ Input(' content', '대사' )}} {{ Input('artwork_name', '작품명' )}} {{ Input('character', '캐릭터' )}} {{
+      Input('location', '위치' , required=False)}} <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+    </form>
+  </div>
+</body>

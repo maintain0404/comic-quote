@@ -11,6 +11,8 @@ class Config(BaseSettings, BaseSchema):
     host: str = "0.0.0.0"
     port: int = 8000
     admins: list[tuple[EmailStr, SecretBytes]] = field(default_factory=list)
+    admin_page_url: str = "/admin"
+    debug: bool = True
 
 
 config = Config()
