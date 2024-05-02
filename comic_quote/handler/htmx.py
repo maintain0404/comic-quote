@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from litestar import Controller, delete, get, post, put
 from litestar.contrib.htmx.request import HTMXRequest
+from litestar.contrib.htmx.response import HTMXTemplate
 from litestar.contrib.pydantic import PydanticDTO
-from litestar.response import Template
 from pydantic import BaseModel
 
 from ..config import config
@@ -18,9 +18,9 @@ class QuoteHTMXController(Controller):
     dependencies = DEPENDENCIES
 
     @get("/")
-    async def get_a_random_quote(self, service: QuoteImpl) -> Template:
+    async def get_a_random_quote(self, service: QuoteImpl) -> HTMXTemplate:
         model = await service.get_random_quote()
-        return Template(template_name="index.html.j2", context={"quote": model})
+        return HTMXTemplate(template_name="index.html.j2", context={"quote": model})
 
 
 class _Quote(BaseModel):
@@ -42,15 +42,15 @@ class AdminController(Controller):
     request_class = HTMXRequest
 
     @get("/login")
-    async def admin_login_page(self) -> Template:
-        return Template(template_name="admin.html.j2")
+    async def admin_login_page(self) -> HTMXTemplate:
+        return HTMXTemplate(template_name="admin.html.j2")
 
     @post("/login")
-    async def admin_login(self) -> Template: ...
+    async def admin_login(self) -> HTMXTemplate: ...
 
     @get("/")
-    async def admin_page(self, service: QuoteImpl) -> Template:
-        return Template(
+    async def admin_page(self, service: QuoteImpl) -> HTMXTemplate:
+        return HTMXTemplate(
             template_name="admin.html.j2", context={"quotes": await service.list()}
         )
 
